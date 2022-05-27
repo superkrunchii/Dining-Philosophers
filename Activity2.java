@@ -18,31 +18,5 @@ public class Activity2 {
             new Thread(philos[i]).start();
         }
 
-        // Current run results in an infinite loop
-        // Uncomment the code below if program will stop once all philosophers have
-        // eaten
-
-        /*
-         * while (true) {
-         * try {
-         * Thread.sleep(1000);
-         * boolean lock = true;
-         * for (Semaphore c : chopsticks) {
-         * if (c.availablePermits() > 0) {
-         * lock = false;
-         * break;
-         * }
-         * }
-         * if (lock) {
-         * Thread.sleep(1000);
-         * System.out.println("Lahat ay kumain na, ggez.");
-         * break;
-         * }
-         * } catch (Exception e) {
-         * e.printStackTrace(System.out);
-         * }
-         * }
-         * System.exit(0);
-         */
     }
 }

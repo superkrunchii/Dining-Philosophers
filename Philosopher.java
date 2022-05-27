@@ -13,7 +13,7 @@ public class Philosopher implements Runnable {
         this.rightChopstick = rightChopstick;
     }
 
-    void think() {
+    synchronized void think() {
         try {
             int randTime = ThreadLocalRandom.current().nextInt(0, 1000);
             System.out.println("Philosopher " + (id + 1) + " is thinking");
@@ -23,7 +23,7 @@ public class Philosopher implements Runnable {
         }
     }
 
-    void eat() {
+    synchronized void eat() {
         try {
             int randTime = ThreadLocalRandom.current().nextInt(0, 1000);
             System.out.println("Philosopher " + (id + 1) + " is eating");
@@ -41,16 +41,14 @@ public class Philosopher implements Runnable {
                 think();
                 // Grab chopsticks if available
                 leftChopstick.acquire();
-                System.out.println("Philosopher " + (id + 1) + " grabs left chopstick");
                 rightChopstick.acquire();
-                System.out.println("Philosopher " + (id + 1) + " grabs right chopstick");
+                System.out.println("Philosopher " + (id + 1) + " grabs left and right chopstick");
                 // Eat
                 eat();
                 // Put down chopsticks after eating
                 leftChopstick.release();
-                System.out.println("Philosopher " + (id + 1) + " puts down left chopstick");
                 rightChopstick.release();
-                System.out.println("Philosopher " + (id + 1) + " puts down right chopstick");
+                System.out.println("Philosopher " + (id + 1) + " puts down left and right chopstick");
             }
         } catch (InterruptedException e) {
             e.printStackTrace(System.out);
